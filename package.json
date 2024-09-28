@@ -1,0 +1,39 @@
+{
+	"name": "travel-app",
+	"version": "1.0.0",
+	"description": "A travel application that includes a simple form where you enter the location you are traveling to and the date you are leaving. If the trip is within a week, you will get the current weather forecast. If the trip is in the future, you will get a predicted forecast.",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node src/server/index.js",
+		"build": "npm run build-dev",
+		"build-prod": "webpack --config webpack.prod.js",
+		"build-dev": "webpack-dev-server  --config webpack.dev.js --open"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@babel/cli": "^7.25.6",
+		"@babel/core": "^7.25.2",
+		"@babel/preset-env": "^7.25.4",
+		"babel-loader": "^9.2.1",
+		"clean-webpack-plugin": "^4.0.0",
+		"css-loader": "^7.1.2",
+		"html-webpack-plugin": "^5.6.0",
+		"mini-css-extract-plugin": "^2.9.1",
+		"node-sass": "^9.0.0",
+		"sass-loader": "^16.0.2",
+		"style-loader": "^4.0.0",
+		"webpack": "^5.94.0",
+		"webpack-cli": "^5.1.4",
+		"webpack-dev-server": "^5.1.0",
+		"workbox-webpack-plugin": "^7.1.0"
+	},
+	"dependencies": {
+		"body-parser": "^1.20.3",
+		"cors": "^2.8.5",
+		"dotenv": "^16.4.5",
+		"express": "^4.21.0"
+	}
+}
