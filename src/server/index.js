@@ -10,9 +10,11 @@ const port = 8080;
 // Serve static files from the 'dist' directory
 app.use(express.static('dist'));
 
+
+
 // Send index.html on the root route
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+app.get("/", function (req, res) {
+    res.sendFile("dist/index.html");
 });
 
 app.listen(port, () => {
