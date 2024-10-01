@@ -4,7 +4,7 @@
 	"description": "A travel application that includes a simple form where you enter the location you are traveling to and the date you are leaving. If the trip is within a week, you will get the current weather forecast. If the trip is in the future, you will get a predicted forecast.",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"test": "jest",
 		"start": "node src/server/index.js",
 		"build": "npm run build-dev",
 		"build-prod": "webpack --config webpack.prod.js",
@@ -21,6 +21,8 @@
 		"clean-webpack-plugin": "^4.0.0",
 		"css-loader": "^7.1.2",
 		"html-webpack-plugin": "^5.6.0",
+		"jest": "^29.7.0",
+		"jest-environment-jsdom": "^29.7.0",
 		"mini-css-extract-plugin": "^2.9.1",
 		"node-sass": "^9.0.0",
 		"sass-loader": "^16.0.2",
