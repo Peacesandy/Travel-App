@@ -6,7 +6,7 @@ A travel application that includes a simple form where you enter the location yo
 - Web application framework for routing - Express
 - Build tool - Webpack. Using webpack
 - External script - Service Worker
-- External API - Meaning Cloud
+- External API - Geonames, Pixabay, Weatherbit.
 
 ## Development Lessons from Building This Application
 - Setting up Webpack
@@ -30,7 +30,7 @@ Unit testing was done using the jest framework. Jest is a framework for testing 
 ## Service Worker
 The project had service worker, set up in webpack. 
 
-## API Used
+## Acknowledgement
 - Geonames API
 - Pixabay API
 - Weatherbit API
