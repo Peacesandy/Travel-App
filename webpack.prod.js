@@ -2,12 +2,11 @@ const path = require("path");
 const webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { GenerateSW } = require('workbox-webpack-plugin');
-
-
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WorkboxPlugin = require("workbox-webpack-plugin");
 
 module.exports = {
-    entry: '"regenerator-runtime/runtime.js", "./src/client/index.js"',
+    entry: ['regenerator-runtime/runtime.js', './src/client/index.js'], // Corrected entry
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
@@ -17,13 +16,13 @@ module.exports = {
     module: {
         rules: [
             {
-                test: "/.js$/",
+                test: /\.js$/, // Corrected test rule
                 exclude: /node_modules/,
                 loader: "babel-loader",
             },
             {
                 test: /\.scss$/,
-                use: ["style-loader", "css-loader", "sass-loader"],
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"], // Using MiniCssExtractPlugin in production
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
@@ -31,8 +30,7 @@ module.exports = {
                 generator: {
                     filename: 'images/[hash][ext][query]',
                 },
-            }
-
+            },
         ],
     },
     plugins: [
@@ -40,9 +38,9 @@ module.exports = {
             template: "./src/client/views/index.html",
             filename: "./index.html",
         }),
-        new GenerateSW({
-            clientsClaim: true,
-            skipWaiting: true,
+        new MiniCssExtractPlugin({
+            filename: 'styles.[contenthash].css', // Extract and hash CSS for cache busting
         }),
+        new WorkboxPlugin.GenerateSW(),
     ],
 };

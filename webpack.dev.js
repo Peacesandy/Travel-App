@@ -3,10 +3,12 @@ const webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { GenerateSW, InjectManifest } = require('workbox-webpack-plugin');
+const WorkboxPlugin = require("workbox-webpack-plugin");
 
 
 module.exports = {
-    entry: '"regenerator-runtime/runtime.js", "./src/client/index.js" ',
+    entry: ['regenerator-runtime/runtime.js', './src/client/index.js'], // Corrected entry
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
@@ -16,13 +18,13 @@ module.exports = {
     module: {
         rules: [
             {
-                test: "/.js$/",
+                test: /\.js$/, // Corrected test rule
                 exclude: /node_modules/,
                 loader: "babel-loader",
             },
             {
                 test: /\.scss$/,
-                use: ["style-loader", "css-loader", "sass-loader"],
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"], // Using MiniCssExtractPlugin
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
@@ -45,12 +47,10 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'styles.css',
         }),
+        new WorkboxPlugin.GenerateSW(),
         new CleanWebpackPlugin({
-            // Simulate the removal of files
             dry: true,
-            // Write Logs to Console
             verbose: true,
-            // Automatically remove all unused webpack assets on rebuild
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false,
         }),
@@ -63,5 +63,4 @@ module.exports = {
             writeToDisk: true, // Forces Webpack to write files to disk in dev mode
         },
     },
-
 };
