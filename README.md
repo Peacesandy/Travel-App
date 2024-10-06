@@ -37,3 +37,63 @@ The project had service worker, set up in webpack.
 
 
 
+## Dependencies
+| DEPENDENCY | VERSION |
+|----------|----------|
+| Node.js | 20.12.2 | 
+| body-parser | 1.20.3| 
+| cors | 2.8.5 | 
+| dotenv | 16.4.5 | 
+| express| 4.21.0 | 
+| node-fetch | 3.3.2 | 
+| regenerator-runtime| 0.14.1 | 
+
+## Dev Dependencies
+| DEPENDENCY | VERSION |
+|----------|----------|
+| @babel/cli | 7.25.6 | 
+| @babel/core | 7.25.2| 
+| @babel/preset-env | 7.25.4 | 
+| babel-loader | 9.2.1 | 
+| clean-webpack-plugin| 4.0.0 | 
+| css-loader | 7.1.2 | 
+| html-webpack-plugin| 5.6.0 | 
+| jest | 29.7.0 | 
+| jest-environment-jsdom| 29.7.0 | 
+| mini-css-extract-plugin | 2.9.1 | 
+| node-sass|9.0.0 | 
+| sass-loader| 16.0.2 | 
+| style-loader | 4.0.0 | 
+| webpack| 5.94.0 | 
+| webpack-cli | 5.1.0 | 
+| workbox-webpack-plugin|7.1.0 | 
+
+## Version
+This project requires the following versions listed above. Please ensure you are using this version to avoid compatibility issues.
+
+## Working with this project
+
+### To Run the Project in Development Mode
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone
+
+2. Navigate to the project directory:
+   ```bash
+   cd <project-directory>
+
+3. Install the dependencies:
+    ```bash
+    npm install
+
+   
+
+
+
+
+
+
+
