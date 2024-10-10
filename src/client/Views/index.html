@@ -1,52 +1,139 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 	<head>
+		<title>Travel Planner App</title>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Travel App</title>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Sora&display=swap"
-			rel="stylesheet" />
-		<link rel="stylesheet" href="styles.css" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      src="https://kit.fontawesome.com/3ebcd25298.js"
-      crossorigin="anonymous"
-    ></script>
+		<meta name="theme-color" content="#46b98f" />
+		<script src="bundle.js"></script>
+		<script>
+			//Check that service workers are supported
+			if ("serviceWorker" in navigator) {
+				// Use the window load event to keep the page load performant
+				window.addEventListener("load", () => {
+					navigator.serviceWorker.register("./service-worker.js");
+				});
+			}
+		</script>
 	</head>
-	<body id="home-body">
+	<body>
 		<header>
-			<nav class="nav-bar">
-				<div class="logo">Wanderlust</div>
-				<ul class="nav-links">
-					<li><a href="#home">Home</a></li>
-					<li><a href="#about">About</a></li>
-					<li><a href="#services">Services</a></li>
-					<li><a href="#contact">Contact</a></li>
-				</ul>
-			</nav>
+			<div class="header container">
+				<a class="logo" href="/" title="Travel Planner"><span></span></a>
+				<nav>
+					<ul>
+						<li><a href="#trip-list" data-nav="trip-list">All Trips</a></li>
+					</ul>
+				</nav>
+			</div>
 		</header>
-          <div class="landing-page"></div>
-      <section class="landing-text">
-        <h1>Welcome to Wanderlust ✈</h1>
-        <p>Plan, Explore, and Experience the World Your Way!</p>
-        <a href="./form.html">
-          <button id="go-button">
-            <i class="fas fa-caret-down">Click Here</i> </button>
-		</a>
-      </section>
-    </div>
+		<main>
+			<section id="trip-form" class="trip-form">
+				<div class="container">
+					<div class="trip-form__block">
+						<div class="page-title">
+							<h1>Travel Planner</h1>
+							<p>Plan your next wonderful trip with us!</p>
+						</div>
+						<div class="trip-form__entry">
+							<div class="trip-form__row">
+								<div class="trip-form__location">
+									<label for="location">
+										<span>Current Location</span>
+										<input type="text" id="location" name="location" />
+									</label>
+								</div>
+								<div class="trip-form__destination">
+									<label for="destination">
+										<span>Destination/City</span>
+										<input type="text" id="destination" name="destination" />
+									</label>
+								</div>
+							</div>
+							<div class="trip-form__row">
+								<div class="trip-form__date-start datepicker">
+									<label for="date-start">
+										<span>Departing</span>
+										<input type="date" id="date-start" name="date-start" />
+									</label>
+								</div>
+								<div class="trip-form__date-end datepicker">
+									<label for="date-end">
+										<span>Returning</span>
+										<input type="date" id="date-end" name="date-end" />
+									</label>
+								</div>
+							</div>
+							<div class="trip-form__search">
+								<span>&nbsp;</span>
+								<button id="search">Search</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section id="trip-create" class="trip-create">
+				<div id="loading-gif" class="loading-gif">
+					<div class="loading-gif__icon"></div>
+				</div>
+				<div class="trip-create-content container">
+					<h3 class="sec-title">New Trip</h3>
+					<div id="new-trip" class="new-trip">
+						<!-- here will be new-trip__location block added by JS -->
+					</div>
+				</div>
+			</section>
+			<section id="trip-list" class="trip-list">
+				<div class="container">
+					<h3 class="sec-title">Saved Trips</h3>
+					<div id="trips-list-content" class="trip-list-content">
+						<!-- here will be new-trip__location block added by JS -->
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer>
+			<div class="footer container">
+				<div class="copyright">Travel Planner &copy; 2019</div>
+				<ul class="social-links">
+					<li>
+						<a
+							class="s-icon fb"
+							target="_blank"
+							title="Facebook"
+							href="http://twitter.com/PeaceSandy3"></a>
+					</li>
+					<li>
+						<a
+							class="s-icon in"
+							target="_blank"
+							title="Linkedin"
+							href="https://www.linkedin.com/in/peace-sandy-bb7a691b0"></a>
+					</li>
+					<li>
+						<a
+							class="s-icon gh"
+							target="_blank"
+							title="GitHub"
+							href="https://github.com/Peacesandy"></a>
+					</li>
+				</ul>
+			</div>
+		</footer>
+		<div id="error-block" class="full-screen">
+			<div class="error-block__content full-screen__block">
+				<div class="full-screen__close js-popup-close">&times;</div>
+				<div class="full-screen__message js-err-message"></div>
+			</div>
+		</div>
+		<div id="to-do-list" class="full-screen">
+			<div class="to-do-list__content full-screen__block">
+				<div class="full-screen__close js-popup-close">&times;</div>
+				<input type="text" name="to-do-list" />
+				<input type="hidden" name="trip-dest-nr" value="" />
+				<div class="save-to-do btn-green">Save</div>
+			</div>
+		</div>
 	</body>
-		  <script>
-      // Check that service workers are supported
-      if ("serviceWorker" in navigator) {
-        // Use the window load event to keep the page load performant
-        window.addEventListener("load", () => {
-          navigator.serviceWorker.register("/service-worker.js");
-        });
-      }
-    </script>
+	<script src="bundle.js"></script>
 </html>

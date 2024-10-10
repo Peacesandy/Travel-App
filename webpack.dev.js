@@ -1,30 +1,26 @@
 const path = require("path");
-const webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { GenerateSW, InjectManifest } = require('workbox-webpack-plugin');
 const WorkboxPlugin = require("workbox-webpack-plugin");
 
-
 module.exports = {
-    entry: ['regenerator-runtime/runtime.js', './src/client/index.js'], // Corrected entry
+    entry: ['./src/client/index.js'],
+    mode: 'development',
+    devtool: 'inline-source-map',
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
-        clean: true, // Ensures old builds are cleaned up
     },
-    mode: "development",
     module: {
         rules: [
             {
-                test: /\.js$/, // Corrected test rule
+                test: /\.js$/,
                 exclude: /node_modules/,
                 loader: "babel-loader",
             },
             {
                 test: /\.scss$/,
-                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"], // Using MiniCssExtractPlugin
+                use: ["style-loader", "css-loader", "sass-loader"], // Use style-loader for live reload
             },
             {
                 test: /\.(png|jpe?g|gif|svg)$/i,
@@ -38,29 +34,11 @@ module.exports = {
     plugins: [
         new HtmlWebPackPlugin({
             template: "./src/client/views/index.html",
-            filename: "./index.html",
+            filename: "index.html",
         }),
-        new HtmlWebPackPlugin({
-            template: "./src/client/views/form.html",
-            filename: "./form.html",
-        }),
-        new MiniCssExtractPlugin({
-            filename: 'styles.css',
-        }),
-        new WorkboxPlugin.GenerateSW(),
-        new CleanWebpackPlugin({
-            dry: true,
-            verbose: true,
-            cleanStaleWebpackAssets: true,
-            protectWebpackAssets: false,
-        }),
+        new CleanWebpackPlugin(),
+        new WorkboxPlugin.GenerateSW({
+            maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // Set limit to 5MB
+        })
     ],
-    devServer: {
-        static: path.resolve(__dirname, 'dist'),
-        hot: true,
-        open: true,
-        devMiddleware: {
-            writeToDisk: true, // Forces Webpack to write files to disk in dev mode
-        },
-    },
 };

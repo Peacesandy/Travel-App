@@ -10,7 +10,6 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
-        clean: true, // Ensures old builds are cleaned up
     },
     mode: "production",
     module: {
@@ -36,11 +35,14 @@ module.exports = {
     plugins: [
         new HtmlWebPackPlugin({
             template: "./src/client/views/index.html",
-            filename: "./index.html",
+            filename: "index.html",
         }),
         new MiniCssExtractPlugin({
             filename: 'styles.[contenthash].css', // Extract and hash CSS for cache busting
         }),
-        new WorkboxPlugin.GenerateSW(),
+        new CleanWebpackPlugin(),
+        new WorkboxPlugin.GenerateSW({
+            maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // Set limit to 5MB
+        })
     ],
 };
